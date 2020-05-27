@@ -12,10 +12,13 @@ library("ggplot2")
 
 # Draw a column (bar) chart of diamonds cuts by price, with each bar filled by 
 # clarity. You should see a _stacked_ bar chart.
+ggplot(data = diamonds) +
+  geom_col(mapping = aes(x = cut, y = price, fill = clarity))
 
 
 # Draw the same chart again, but with each element positioned to "fill" the y axis
-
+ggplot(data = diamonds) +
+  geom_col(mapping = aes(x = cut, y = price, fill = clarity), position = "fill")
 
 # Draw the same chart again, but with each element positioned to "dodge" each other
 
@@ -80,11 +83,16 @@ library("ggplot2")
 # Take the scatter plot of price by carat data (colored by clarity) and add 
 # _facets_ based on the diamond's `color`
 
+ggplot(data = diamonds) +
+  geom_point(mapping = aes(x = carat, y = price, color = clarity)) +
+  scale_color_brewer(palette = "Spectral") +
+  facet_wrap(~ color)
 
 
 ## Saving Plots
 
 # Use the `ggsave()` function to save the current (recent) plot to disk.
-# Name the output file "my-plot.png".
+# Name the output file "my-plot.png"
 # Make sure you've set the working directory!!
+ggsave("my-plot.png")
 
